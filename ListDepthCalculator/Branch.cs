@@ -8,6 +8,7 @@ namespace ListDepthCalculator
 
         public Branch()
         {
+            branches = new List<Branch>();
         }
 
         public Branch(List<Branch> branch)

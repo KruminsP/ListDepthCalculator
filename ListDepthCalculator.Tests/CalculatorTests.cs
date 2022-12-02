@@ -18,9 +18,9 @@ namespace ListDepthCalculator.Tests
         [TestMethod]
         public void CalculateDepth_OneLevel_ReturnsOne()
         {
-            var branchList = new List<Branch>();
+            var branch = new Branch();
 
-            var result = _calculator.Counter(branchList);
+            var result = _calculator.Counter(branch);
 
             result.Should().Be(1);
         }
@@ -28,35 +28,30 @@ namespace ListDepthCalculator.Tests
         [TestMethod]
         public void CalculateDepth_TwoLevels_ReturnsTwo()
         {
-            var branchList = new List<Branch>
-            {
-                new Branch(new List<Branch>())
-            };
+            var branch = new Branch(
+                new List<Branch>
+                {
+                    new Branch()
+                });
 
-            var branchListNull = new List<Branch>
-            {
-                new Branch()
-            };
 
-            var result = _calculator.Counter(branchList);
-            var resultNull = _calculator.Counter(branchListNull);
+            var result = _calculator.Counter(branch);
 
             result.Should().Be(2);
-            resultNull.Should().Be(2);
         }
 
         [TestMethod]
         public void CalculateDepth_LargeDepth_ReturnsDepth()
         {
-            var thirdDegreeList = new List<Branch>
+            var thirdDegreeBranch = new Branch(new List<Branch>
             {
                 new Branch(new List<Branch>
                 {
                     new Branch()
                 })
-            };
+            });
 
-            var seventhDegreeList = new List<Branch>
+            var seventhDegreeBranch = new Branch(new List<Branch>
             {
                 new Branch(new List<Branch>
                 {
@@ -74,10 +69,10 @@ namespace ListDepthCalculator.Tests
                         })
                     })
                 })
-            };
+            });
 
-            var thirdDegreeResult = _calculator.Counter(thirdDegreeList);
-            var seventhDegreeResult = _calculator.Counter(seventhDegreeList);
+            var thirdDegreeResult = _calculator.Counter(thirdDegreeBranch);
+            var seventhDegreeResult = _calculator.Counter(seventhDegreeBranch);
 
             thirdDegreeResult.Should().Be(3);
             seventhDegreeResult.Should().Be(7);
@@ -86,16 +81,16 @@ namespace ListDepthCalculator.Tests
         [TestMethod]
         public void CalculateDepth_MixedLevels_ReturnsDepth()
         {
-            var branchList = new List<Branch>
+            var branch = new Branch(new List<Branch>
             {
                 new Branch(),
                 new Branch(new List<Branch>
                 {
                     new Branch()
                 })
-            };
+            });
 
-            var result = _calculator.Counter(branchList);
+            var result = _calculator.Counter(branch);
 
             result.Should().Be(3);
         }
