@@ -5,10 +5,8 @@ namespace ListDepthCalculator
 {
     public class Calculator
     {
-        public int Counter(List<Branch> input, int depthCounter = 0)
+        public int Counter(List<Branch> input, int depthCounter = 1)
         {
-            depthCounter = depthCounter == 0 ? 1 : depthCounter;
-
             if (input == null || input.Count == 0)
             {
                 return depthCounter;
